@@ -32,8 +32,10 @@ body {
 .text-vertical-center h3 {
 	color: white;
 	font-size: 2.5em;
+}
 
-
+.text-vertical-center p{
+    color: white;
 }
 
 
