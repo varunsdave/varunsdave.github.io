@@ -60,12 +60,12 @@
 		<section class="about" id="sillyStocks" >
 		<div class ="container">
 			<div class="row">
-			 <div class="col-lg-12 text-center">
+			 <div class="col-lg-10 col-lg-offset-1 text-center">
 				<p> Enter the current stock value below </p>
-				<a>Enter Stock Price </a><input type="text" name="enter" class="enter" value="" id="stockPrice"/>
-				<a>Enter Stock Quantity </a><input type="text" name="quantity" class="enter" value="" id="quantity"/>
+				<p><a class="lead text-center">Enter Stock Price </a><input type="text" name="enter" class="enter" value="" id="stockPrice"/></p>
+				<p><a class="lead text-center">Enter Stock Quantity </a><input type="text" name="quantity" class="enter" value="" id="quantity"/></p>
 				<input class="btn btn-primary btn-lg type="button" value="Find Stock Price" OnClick="getBreakEvenPrice()"/>
-				 <div id="price" class="col-lg-12 text-center"></div>
+				<div id="price" class="col-lg-12 text-center"></div>
 				<script type="text/javascript">
 				  // var lol = document.getElementById('lolz');
 				   function getBreakEvenPrice() {
