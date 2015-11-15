@@ -69,34 +69,33 @@
 				<script type="text/javascript">
 				  // var lol = document.getElementById('lolz');
 				   function getBreakEvenPrice() {
-					var sPrice = document.getElementById('stockPrice').value;
-					var bQuant = document.getElementById('quantity').value;
-					var node = document.getElementById("price");
-					var outputText = "<p></p>";
-					if (sPrice <0.01){
-						node.innerHTML = "<p>Please enter a valid stock price </p>";
-						return;
-					}
-					
-					if (bQuant < 1){
-						outputText = outputText + "<p>Using default quantity of 100</p>";
-						bQuant = 100;
-				
-					}
-					var stockPrice = sPrice;
-					var quantity = bQuant;
-					var baseCommision = 4.95;
-					var exchangeFee = 0.0035
-					var commision = (quantity * exchangeFee ) + baseCommision;
-					var totalBuyPrice = stockPrice * quantity + 2*commision;
+						var sPrice = document.getElementById('stockPrice').value;
+						var bQuant = document.getElementById('quantity').value;
+						var node = document.getElementById("price");
+						var outputText = "<p></p>";
+						if (sPrice <0.01){
+							node.innerHTML = "<p>Please enter a valid stock price </p>";
+							return;
+						}
+						if (bQuant < 1){
+							outputText = outputText + "<br>Using default quantity of 100";
+							bQuant = 100;
+						}
+						var stockPrice = sPrice;
+						var quantity = bQuant;
+						var baseCommision = 4.95;
+						var exchangeFee = 0.0035
+						var commision = (quantity * exchangeFee ) + baseCommision;
+						var totalBuyPrice = stockPrice * quantity + commision;
 
-					var percentageCommision = (2*commision)/(stockPrice * quantity);
+						var percentageCommision = (2*commision)/(stockPrice * quantity);
 
-					var priceToSell = (stockPrice*(1+percentageCommision)).toFixed(2); 
-					var diffPrice = (priceToSell-stockPrice).toFixed(2);
-					//outputText = outputText +"<p> You should sell at :$" +String(priceToSell)+"</p><p>Your price per stock has to increase by :$"+String(diffPrice)+"</p>":
-					node.innerHTML = outputText+"<p></p>To Breakeven:<p> You should sell at : $" + String(priceToSell) +"</p><p>Each stock has to appreciate by :$"+ String(diffPrice) +"</p>";
-					//node.innherHTML = outputText;
+						var priceToSell = (stockPrice*(1+percentageCommision)).toFixed(2); 
+						var diffPrice = (priceToSell-stockPrice).toFixed(2);
+						
+						outputText = outputText+"<br>Your total buy price, including commision, will be: <strong>$"+totalBuyPrice+"</strong>";
+						outputText = outputText+"<br>When you sell, your approx. commision will be <strong>$"+commision+"</strong>";
+						node.innerHTML = outputText+"<p></p>To Breakeven:<p> You should sell at : <strong>$" + String(priceToSell) +"</strong><br> Each stock has to appreciate by :<strong>$"+ String(diffPrice) +"</strong>";
 					}
 				</script>
 				</div>
