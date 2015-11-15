@@ -92,10 +92,18 @@
 
 						var priceToSell = (stockPrice*(1+percentageCommision)).toFixed(2); 
 						var diffPrice = (priceToSell-stockPrice).toFixed(2);
+						var beatOSAP = (priceToSell*1.052).toFixed(2);
+						var beat32 = (priceToSell*1.032).toFixed(2);
 						
-						outputText = outputText+"<br>Your total buy price, including commision, will be: <strong>$"+totalBuyPrice+"</strong>";
-						outputText = outputText+"<br>When you sell, your approx. commision will be <strong>$"+commision+"</strong>";
-						node.innerHTML = outputText+"<p></p>To Breakeven:<p> You should sell at : <strong>$" + String(priceToSell) +"</strong><br> Each stock has to appreciate by :<strong>$"+ String(diffPrice) +"</strong>";
+						var earnedOSAP = ((beatOSAP - priceToSell)*quantity).toFixed(2);
+						var earned32 = ((beat32 - priceToSell)*quantity).toFixed(2);
+						
+						outputText = outputText+"<br>Your total buy price, including commision, will be: <strong>$"+totalBuyPrice.toFixed(2)+"</strong>";
+						outputText = outputText+"<br>When you sell, your approx. commision will be <strong>$"+commision.toFixed(2)+"</strong>";
+						outputText = outputText+"<br>To Breakeven:<br> You should sell at : <strong>$" + String(priceToSell) +"</strong><br> Each stock has to appreciate by :<strong>$"+ String(diffPrice) +"</strong>";
+						outputText = outputText +"<br>To gain 5.2%, the stock price has to increase to: <strong>$"+String(beatOSAP)+"</strong> - earned: <strong>$"+String(earnedOSAP)+"</strong>"; 
+						outputText = outputText +"<br>To gain 3.2%, the stock price has to increase to: <strong>$"+String(beat32)+"</strong> - earned: <strong>$"+String(earned32)+"</strong>";
+						node.innerHTML= outputText;
 					}
 				</script>
 				</div>
