@@ -81,7 +81,7 @@
 						var node = document.getElementById("price");
 						//alert(String(bQuant));
 						var outputText = "<p></p>";
-						if (sPrice <0.05){
+						if (sPrice <0.005){
 							node.innerHTML = "<p>Please enter a valid stock price greater than $0.05 </p>";
 							return;
 						}
@@ -189,7 +189,7 @@
 						tableArea.appendChild(table);
 						
 						var disclaimer = document.getElementById("disclaimer");
-						disclaimer.innerHTML = "<br><br> * DISCLAIMER: The content on this page is for informational purpose only in a very specific case. Consult with a professional before making any financial decisions";
+						disclaimer.innerHTML = "<br><br> * DISCLAIMER: The content on this page is for informational purpose only. Consult with a professional before making any financial decisions";
 						//outputText = outputText + 
 						
 						
