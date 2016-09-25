@@ -19,6 +19,7 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 
@@ -32,132 +33,124 @@
       ga('send', 'pageview');
 
     </script>
-   </head>
 
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart(data2) {
+      	if (data2 == undefined){
+      		return;
+      	}
+
+		var arr = [];
+		arr.push(['Date','Actual','Return','Target @ 6%', 'Interest']);
+		for (i = 0; i < data2.length; i++){
+			var row = data2[i];
+			var dataTableRow = new Array(row.length );
+			dataTableRow[0] = row[0];
+			for (j =1; j < row.length ; j++){
+				dataTableRow[j] = parseFloat(row[j]);
+			}
+			arr.push(dataTableRow);
+
+		}
+	
+		var data = google.visualization.arrayToDataTable(arr);
+
+        // Set chart options
+      	var options = {
+          title: 'Varun\'s Mutual Funds Historical Chart',
+          curveType: 'function',
+          hAxis: {showTextEvery: 3},
+          vAxes: {0: {
+                      gridlines: {color: 'transparent'},
+                      },
+                  1: {
+                  	
+                      gridlines: {color: 'transparent'}
+                  }
+              },
+                  
+          series: {0: {targetAxisIndex:0},
+                   1:{targetAxisIndex:0},
+                   2: {targetAxisIndex:0,
+                   lineDashStyle: [4, 4] },
+                   3:{targetAxisIndex:1}
+                   },
+
+          legend: { position: 'top' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+</head>
 <body>
-
-    <!-- Navigation -->
+ <!-- Navigation -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars fa-2x"></i></a>
     <nav id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn  pull-right toggle"><i class="fa fa-times fa-2x"></i></a>
             <li class="sidebar-brand">
-                <a href="#top">Varun Dave</a>
+                <a href="index.html">Varun Dave</a>
             </li>
             <li>
-                <a href="#top">Home</a>
+                <a href="index.html">Home</a>
             </li>
             <li>
-                <a href="#about">My Story</a>
+                <a href="index.html#about">My Story</a>
             </li>
 			<li>
-				<a href="stockCalc.html">Stock calc</a>
+				<a href="#sillyStocks">Stock calc</a>
 			</li>
-            <li>
-                <a id ="fund" href="mutual_fund_status.html">Fund Update</a>
-            </li>
             <li>
                 <a href="#contact">Contact me</a>
             </li>
 
         </ul>
     </nav>
+		<section class="about" id="sillyStocks" >
+		<div class ="container">
+			<div class="row">
+				<script >
+					function getFundPrice(){
+						$.ajax({
+							type: 'GET',
+				        	url: "http://localhost:3000/about",
+				        	success: function(data){
+				        		//alert(data);
+				        	//	$('#price').html(data);
+				        		drawChart(data);
 
-    <!-- Header -->
-    <header id="top" class="header">
-        <div class="text-vertical-center">
-            <h1>Varun Dave</h1>
-            <h3>I am an aspiring recent graduate from University of Waterloo.</h3>
-            <br />
-            <p>I enjoy Cricket, Android development, computer vision, running, and driving</p> 
-            <br />
-
-            <a href="#about" class="btn btn-primary btn-lg"><strong>Find Out More</strong></a>
-            <a href="https://docs.google.com/viewer?url=https://github.com/varunsdave/varunsdave.github.io/raw/master/resources/resume.pdf" class="btn btn-primary btn-lg"><strong>Resume</strong></a>
-            <br/>
-            
-            <br/>   
-            
-            <a href="https://ca.linkedin.com/pub/varun-dave/20/a9a/39">
-            <img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x33.png" width="160" height="33" border="0" alt="View Varun Dave's profile on LinkedIn">
-            <br />
-        </a>
-        </div>
-    </header>
-
-    <!-- About -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>A little bit about me</h2>
-			<p class="lead text-center">
-                I recently graduated from University of Waterloo with an Undergraduate Degree in Computer Engineering program with a biomechanics option. I aim to develop 
-                technologies that have a positive impact on people. 
-
-                Some of the places that I have had the fortune of doing my internships for include University of Waterloo, Qualcomm Canada Inc, Ontario Ministry of Health - Long Term Care, and McMaster University. 
-
-                I am a massive Cricket fan. Quite often in the summer you will see me out in the park either at a practice or on the ground playing Cricket. 
-
-                A quick list of my projects:
-                <ol class = "lead text-left">
-                        <li><a href="http://www.engMedix.com">PhysioBuddy</a></li>
-                        <li><a href="https://play.google.com/store/apps/details?id=com.varunsdave.gitainenglish">Gita in English</a></li>
-                        <li><a href="https://www.youtube.com/watch?v=OMWRJg0GdDw">3D Ultrasound Visualizer</a></li>
-                        <li><a href="https://www.youtube.com/watch?v=KtcFCDXVkXc">Cricket ball tracker</a></li>
-                </ol>
-
-            </p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
-
-
-
-
-    <!-- Portfolio -->
-    <section id="portfolio" class="portfolio bg-primary">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h2>PhysioBuddy</h2>
-                    <hr class="small">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <img class="img-portfolio img-responsive" src="img/portfolio-2.jpg">
-                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <img class="img-portfolio img-responsive" src="img/portfolio-3.jpg">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                               <img class="img-portfolio img-responsive" src="img/portfolio-6.png">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.row (nested) -->
-                </div>
-                <!-- /.col-lg-10 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
-
-
-    <!-- Footer 
+				        	}
+				       	});
+            		};
+			</script>
+			 <div class="col-lg-10 col-lg-offset-1 text-center">
+				<input class="btn btn-primary btn-lg" type="button" value="Get Fund info" OnClick="getFundPrice()" />
+			</div>
+			<div id="disclaimer"  class="col-lg-12 text-center">This is just for information only. Information may not be accurate as shown here.</div>
+		 	<div id="chart_div" class="col-lg-12 text-center" style="height: 600px"></div>
+			
+		
+			
+				
+			</div>
+		</div>
+	</section>
+	
+	  <!-- Footer 
 	=========================================================================================-->
     <footer>
         <div class="container" id = "contact">
@@ -172,7 +165,7 @@
                     <br>
                     <ul class="list-inline">
                         <li>
-                        <a  href = "https://ca.linkedin.com/pub/rob-burns/53/251/a8a"><i class = "fa fa-linkedin-square fa-2x"></i></a>
+                        <a  href = "https://ca.linkedin.com/in/varunsdave"><i class = "fa fa-linkedin-square fa-2x"></i></a>
                         </li>
                         
                         <li>
@@ -188,8 +181,7 @@
             </div>
         </div>
     </footer>
-	
-		
+			
 <!-- Modal
 ====================================================================== -->
 <div class="modal fade" id = "contact2" role = "dialog">
@@ -279,5 +271,3 @@
     </script>
 
 </body>
-
-</html>
