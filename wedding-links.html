@@ -35,65 +35,6 @@
     </script>
 
      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
 
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart(data2) {
-      	if (data2 == undefined){
-      		return;
-      	}
-
-		var arr = [];
-		arr.push(['Date','Actual','Return','Target @ 6%', 'Interest']);
-		for (i = 0; i < data2.length; i++){
-			var row = data2[i];
-			var dataTableRow = new Array(row.length );
-			dataTableRow[0] = row[0];
-			for (j =1; j < row.length ; j++){
-				dataTableRow[j] = parseFloat(row[j]);
-			}
-			arr.push(dataTableRow);
-
-		}
-	
-		var data = google.visualization.arrayToDataTable(arr);
-
-        // Set chart options
-      	var options = {
-          title: 'Varun\'s Mutual Funds Historical Chart',
-          curveType: 'function',
-          hAxis: {showTextEvery: 3},
-          vAxes: {0: {
-                      gridlines: {color: 'transparent'},
-                      },
-                  1: {
-                  	
-                      gridlines: {color: 'transparent'}
-                  }
-              },
-                  
-          series: {0: {targetAxisIndex:0},
-                   1:{targetAxisIndex:0},
-                   2: {targetAxisIndex:0,
-                   lineDashStyle: [4, 4] },
-                   3:{targetAxisIndex:1}
-                   },
-
-          legend: { position: 'top' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-
-        chart.draw(data, options);
-      }
-    </script>
 </head>
 </html>
